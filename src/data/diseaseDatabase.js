@@ -1,0 +1,50 @@
+// Local rare disease database for frontend checks
+export const RARE_DISEASES = [
+  'Gaucher Disease',
+  'Fabry Disease',
+  'Wilson Disease',
+  'Pompe Disease',
+  'PKU',
+  'Cystic Fibrosis',
+  'Huntington Disease',
+  'HAE',
+  'ATTR Amyloidosis',
+  'AIP',
+  'Alkaptonuria',
+  'Marfan Syndrome',
+];
+
+export const RARE_KEYWORDS = {
+  'bone pain': 'Gaucher Disease',
+  'spleen enlargement': 'Gaucher Disease',
+  'thrombocytopenia': 'Gaucher Disease',
+  'gaucher': 'Gaucher Disease',
+  'fabry': 'Fabry Disease',
+  'wilson': 'Wilson Disease',
+  'kayser-fleischer': 'Wilson Disease',
+  'pompe': 'Pompe Disease',
+  'pku': 'PKU',
+  'phenylketonuria': 'PKU',
+  'cystic fibrosis': 'Cystic Fibrosis',
+  'huntington': 'Huntington Disease',
+  'chorea': 'Huntington Disease',
+  'hae': 'HAE',
+  'angioedema': 'HAE',
+  'amyloidosis': 'ATTR Amyloidosis',
+  'porphyria': 'AIP',
+  'alkaptonuria': 'Alkaptonuria',
+  'marfan': 'Marfan Syndrome',
+};
+
+export const COMMON_DISEASES = [
+  'Hypertension',
+  'Type 2 Diabetes',
+  'Asthma',
+  'Influenza',
+  'GERD',
+  'Tuberculosis',
+  'Pneumonia',
+  'Thyroid Disorder',
+  'Stroke/TIA',
+  'Allergy',
+];

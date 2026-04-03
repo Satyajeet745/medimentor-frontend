@@ -1,0 +1,678 @@
+/* ============================================
+   MEDIMENTOR — LIGHT PROFESSIONAL THEME
+   ============================================ */
+
+:root {
+  --bg-deep: #F0F4F8;
+  --bg-surface: #FFFFFF;
+  --bg-elevated: #F8FAFC;
+  --text-primary: #1A202C;
+  --text-secondary: #4A5568;
+  --text-muted: #A0AEC0;
+  --accent: #0D9488;
+  --accent-hover: #0B7A6E;
+  --accent-light: rgba(13, 148, 136, 0.1);
+  --emergency: #DC2626;
+  --emergency-light: rgba(220, 38, 38, 0.08);
+  --warning: #D97706;
+  --warning-light: rgba(217, 119, 6, 0.1);
+  --success: #059669;
+  --success-light: rgba(5, 150, 105, 0.1);
+  --purple: #7C3AED;
+  --purple-light: rgba(124, 58, 237, 0.1);
+  --border: #E2E8F0;
+  --border-accent: rgba(13, 148, 136, 0.3);
+  --shadow-card: 0 2px 12px rgba(0,0,0,0.06);
+  --shadow-elevated: 0 8px 32px rgba(0,0,0,0.1);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --font-ui: 'DM Sans', sans-serif;
+  --font-display: 'Lora', serif;
+  --transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-ui);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-root { min-height: 100vh; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.2; }
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes pulse-emergency { 0%,100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.4); } 50% { box-shadow: 0 0 30px 15px rgba(220,38,38,0.1); } }
+@keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+@keyframes barFill { from { width: 0%; } }
+@keyframes pulse-dot { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.4; transform:scale(0.7); } }
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes countUp { from { opacity: 0; } to { opacity: 1; } }
+
+.animate-fadeIn { animation: fadeIn 0.7s ease both; }
+.animate-d1 { animation-delay: 0.1s; }
+.animate-d2 { animation-delay: 0.2s; }
+.animate-d3 { animation-delay: 0.3s; }
+
+/* ============================================
+   NAVBAR
+   ============================================ */
+.navbar {
+  position: fixed; top:0; left:0; right:0; z-index:1000;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 68px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+}
+
+.navbar-logo { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: var(--accent); cursor: pointer; }
+.navbar-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+.navbar-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: var(--transition); }
+.navbar-links a:hover { color: var(--accent); }
+
+.navbar-cta {
+  background: var(--accent); color: white; border: none;
+  padding: 10px 24px; border-radius: var(--radius-sm);
+  font-family: var(--font-ui); font-size: 0.9rem; font-weight: 600;
+  cursor: pointer; transition: var(--transition);
+}
+.navbar-cta:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(13,148,136,0.3); }
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  text-align: center; background: linear-gradient(135deg, #F0FDF9 0%, #E6F7F5 40%, #F0F4F8 100%);
+  position: relative; overflow: hidden;
+}
+
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: radial-gradient(circle at 20% 50%, rgba(13,148,136,0.08) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(13,148,136,0.06) 0%, transparent 40%);
+}
+
+.hero-particles { position: absolute; inset: 0; z-index: 0; }
+.hero-content { position: relative; z-index: 2; max-width: 800px; padding: 0 24px; animation: fadeIn 0.8s ease both; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--accent-light); border: 1px solid var(--border-accent);
+  color: var(--accent); font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 6px 16px; border-radius: 100px; margin-bottom: 28px;
+}
+
+.hero-title { font-family: var(--font-display); font-size: clamp(2.8rem,6vw,5rem); font-weight: 700; color: var(--text-primary); margin-bottom: 14px; letter-spacing: -0.02em; }
+.hero-title span { color: var(--accent); }
+.hero-subtitle { font-family: var(--font-display); font-size: clamp(1rem,2.2vw,1.25rem); color: var(--text-secondary); font-style: italic; margin-bottom: 20px; }
+.hero-desc { font-size: 1rem; color: var(--text-secondary); max-width: 540px; margin: 0 auto 40px; line-height: 1.7; }
+
+.hero-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+.btn-primary {
+  background: var(--accent); color: white; border: none;
+  padding: 14px 32px; border-radius: var(--radius-sm);
+  font-family: var(--font-ui); font-size: 1rem; font-weight: 600;
+  cursor: pointer; transition: var(--transition);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13,148,136,0.35); }
+
+.btn-outline {
+  background: white; color: var(--accent);
+  border: 1.5px solid var(--accent);
+  padding: 14px 32px; border-radius: var(--radius-sm);
+  font-family: var(--font-ui); font-size: 1rem; font-weight: 500;
+  cursor: pointer; transition: var(--transition);
+}
+.btn-outline:hover { background: var(--accent-light); }
+
+/* ============================================
+   VIDEO CARDS
+   ============================================ */
+.video-section { padding: 100px 48px; background: white; }
+.section-header { text-align: center; margin-bottom: 56px; }
+.section-title { font-family: var(--font-display); font-size: clamp(1.6rem,3vw,2.3rem); color: var(--text-primary); margin-bottom: 12px; }
+.section-subtitle { color: var(--text-secondary); font-size: 1rem; max-width: 540px; margin: 0 auto; line-height: 1.7; }
+
+.video-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; max-width: 1160px; margin: 0 auto; }
+.video-card { position: relative; border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-elevated); border: 1px solid var(--border); cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; aspect-ratio: 16/9; }
+.video-card:hover { transform: scale(1.02); box-shadow: var(--shadow-elevated); }
+.video-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.15) 50%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 28px; }
+.video-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #5eead4; margin-bottom: 8px; }
+.video-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: white; margin-bottom: 6px; }
+.video-desc { font-size: 0.82rem; color: rgba(255,255,255,0.85); line-height: 1.5; }
+
+/* ============================================
+   FEATURES
+   ============================================ */
+.features-section { padding: 100px 48px; background: var(--bg-deep); }
+.features-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; max-width: 1160px; margin: 0 auto; }
+.feature-card { background: white; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 28px 22px; transition: var(--transition); opacity: 0; transform: translateY(30px); box-shadow: var(--shadow-card); }
+.feature-card.visible { opacity:1; transform:translateY(0); transition: opacity 0.6s ease, transform 0.6s ease; }
+.feature-card:hover { border-color: var(--border-accent); transform: translateY(-4px); box-shadow: var(--shadow-elevated); }
+.feature-icon { font-size: 2rem; margin-bottom: 14px; display: block; }
+.feature-title { font-family: var(--font-display); font-size: 1rem; font-weight: 600; margin-bottom: 8px; color: var(--text-primary); }
+.feature-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+
+/* ============================================
+   HOW IT WORKS
+   ============================================ */
+.how-section { padding: 100px 48px; background: white; }
+.steps-flow { display: flex; align-items: flex-start; justify-content: center; gap: 0; max-width: 1100px; margin: 0 auto; flex-wrap: wrap; }
+.step-item { display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; min-width: 160px; padding: 0 8px; position: relative; }
+.step-item::after { content: '→'; position: absolute; right: -16px; top: 20px; font-size: 1.2rem; color: var(--accent); }
+.step-item:last-child::after { display: none; }
+.step-circle { width: 52px; height: 52px; border-radius: 50%; background: var(--accent-light); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 700; color: var(--accent); margin-bottom: 14px; font-family: var(--font-display); }
+.step-title { font-weight: 600; font-size: 0.88rem; color: var(--text-primary); margin-bottom: 5px; }
+.step-desc { font-size: 0.76rem; color: var(--text-muted); line-height: 1.5; }
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.landing-footer { background: var(--text-primary); border-top: 1px solid #2D3748; padding: 32px 48px; text-align: center; }
+.footer-disclaimer { font-size: 0.8rem; color: #CBD5E0; margin-bottom: 10px; font-weight: 500; }
+.footer-credits { font-size: 0.78rem; color: #718096; }
+
+/* ============================================
+   LOGIN PAGE
+   ============================================ */
+.login-page { min-height: 100vh; background: linear-gradient(135deg, #F0FDF9 0%, #E6F7F5 40%, #F0F4F8 100%); display: flex; align-items: center; justify-content: center; padding: 24px; }
+
+/* ============================================
+   APP LAYOUT
+   ============================================ */
+.app-layout { display: flex; min-height: 100vh; background: var(--bg-deep); }
+
+.app-topbar {
+  position: fixed; top:0; left:0; right:0; height:64px;
+  background: rgba(255,255,255,0.95); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border); display: flex;
+  align-items: center; justify-content: space-between;
+  padding: 0 28px; z-index: 100;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+}
+.topbar-logo { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--accent); }
+.topbar-patient { font-size: 0.82rem; color: var(--text-secondary); background: var(--bg-elevated); padding: 5px 12px; border-radius: 100px; border: 1px solid var(--border); }
+.topbar-actions { display: flex; gap: 8px; }
+.topbar-btn { background: white; border: 1px solid var(--border); color: var(--text-secondary); padding: 7px 14px; border-radius: var(--radius-sm); font-family: var(--font-ui); font-size: 0.82rem; cursor: pointer; transition: var(--transition); }
+.topbar-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+.app-sidebar { width: 240px; background: white; border-right: 1px solid var(--border); padding: 80px 20px 28px; position: fixed; left:0; top:0; bottom:0; overflow-y: auto; box-shadow: 1px 0 8px rgba(0,0,0,0.04); }
+.sidebar-title { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; }
+
+.step-indicator { position: relative; padding-left: 22px; }
+.step-indicator::before { content:''; position:absolute; left:6px; top:20px; bottom:20px; width:2px; background:var(--border); }
+.si-item { display:flex; align-items:center; gap:12px; margin-bottom:24px; cursor:pointer; transition:var(--transition); position:relative; }
+.si-dot { width:14px; height:14px; border-radius:50%; border:2px solid var(--border); background:white; flex-shrink:0; position:relative; z-index:1; transition:var(--transition); }
+.si-item.active .si-dot { border-color:var(--accent); background:var(--accent); box-shadow:0 0 0 4px var(--accent-light); }
+.si-item.completed .si-dot { border-color:var(--success); background:var(--success); }
+.si-item.completed .si-dot::after { content:'✓'; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:8px; color:white; font-weight:700; }
+.si-label { font-size:0.8rem; color:var(--text-muted); font-weight:500; transition:var(--transition); }
+.si-item.active .si-label { color:var(--text-primary); font-weight:700; }
+.si-item.completed .si-label { color:var(--success); }
+
+.app-main { margin-left:240px; margin-top:64px; flex:1; padding:40px; min-height:calc(100vh - 64px); }
+
+/* ============================================
+   FORMS
+   ============================================ */
+.step-container { max-width:680px; animation:fadeIn 0.4s ease both; }
+.step-heading { font-family:var(--font-display); font-size:1.7rem; font-weight:700; color:var(--text-primary); margin-bottom:6px; }
+.step-subheading { color:var(--text-secondary); font-size:0.88rem; margin-bottom:32px; line-height:1.6; }
+
+.form-grid { display:flex; flex-direction:column; gap:18px; }
+.form-group { display:flex; flex-direction:column; gap:6px; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+
+label { font-size:0.78rem; font-weight:700; color:var(--text-secondary); letter-spacing:0.04em; text-transform:uppercase; }
+
+input[type="text"], input[type="number"], input[type="tel"], textarea, select {
+  background:white; border:1.5px solid var(--border); color:var(--text-primary);
+  padding:11px 14px; border-radius:var(--radius-sm); font-family:var(--font-ui);
+  font-size:0.92rem; transition:var(--transition); width:100%; outline:none;
+}
+input:focus, textarea:focus { border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-light); }
+input::placeholder, textarea::placeholder { color:var(--text-muted); }
+textarea { resize:vertical; min-height:110px; line-height:1.6; }
+
+.radio-group { display:flex; gap:12px; }
+.radio-option { display:flex; align-items:center; gap:7px; cursor:pointer; }
+.radio-option input[type="radio"] { width:auto; accent-color:var(--accent); cursor:pointer; }
+.radio-option span { font-size:0.88rem; color:var(--text-secondary); }
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn-next { background:var(--accent); color:white; border:none; padding:12px 28px; border-radius:var(--radius-sm); font-family:var(--font-ui); font-size:0.92rem; font-weight:600; cursor:pointer; transition:var(--transition); margin-top:6px; display:inline-flex; align-items:center; gap:8px; }
+.btn-next:hover:not(:disabled) { background:var(--accent-hover); transform:translateY(-1px); box-shadow:0 6px 20px rgba(13,148,136,0.3); }
+.btn-next:disabled { opacity:0.4; cursor:not-allowed; }
+.btn-secondary { background:white; color:var(--text-secondary); border:1.5px solid var(--border); padding:12px 22px; border-radius:var(--radius-sm); font-family:var(--font-ui); font-size:0.88rem; cursor:pointer; transition:var(--transition); display:inline-flex; align-items:center; gap:8px; }
+.btn-secondary:hover { border-color:var(--accent); color:var(--accent); }
+.btn-row { display:flex; gap:12px; margin-top:22px; flex-wrap:wrap; }
+
+/* ============================================
+   DEMO SECTION
+   ============================================ */
+.demo-section { background:var(--accent-light); border:1px solid var(--border-accent); border-radius:var(--radius-md); padding:18px; margin-bottom:28px; }
+.demo-label { font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:12px; display:flex; align-items:center; gap:6px; }
+.demo-buttons { display:flex; gap:8px; flex-wrap:wrap; }
+.demo-btn { background:white; border:1.5px solid var(--border); color:var(--text-secondary); padding:7px 14px; border-radius:100px; font-size:0.78rem; font-weight:500; cursor:pointer; transition:var(--transition); font-family:var(--font-ui); }
+.demo-btn:hover { border-color:var(--accent); color:var(--accent); background:var(--accent-light); }
+.demo-btn.emergency { border-color:var(--emergency); color:var(--emergency); }
+.demo-btn.emergency:hover { background:var(--emergency-light); }
+
+/* ============================================
+   LOADING
+   ============================================ */
+.loading-overlay { position:fixed; inset:0; background:rgba(255,255,255,0.88); backdrop-filter:blur(8px); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:999; gap:20px; }
+.loading-spinner { width:52px; height:52px; border:3px solid var(--border); border-top-color:var(--accent); border-radius:50%; animation:spin 1s linear infinite; }
+.loading-text { color:var(--text-primary); font-size:1rem; font-weight:600; }
+
+/* ============================================
+   EMERGENCY ALERT (patient only)
+   ============================================ */
+.emergency-overlay { position:fixed; inset:0; background:rgba(220,38,38,0.06); backdrop-filter:blur(4px); z-index:9999; display:flex; align-items:center; justify-content:center; animation:fadeIn 0.3s ease; }
+.emergency-box { background:white; border:2px solid var(--emergency); border-radius:var(--radius-xl); padding:48px 48px; text-align:center; max-width:500px; box-shadow:0 20px 60px rgba(220,38,38,0.2); animation:pulse-emergency 2s infinite; }
+.emergency-icon { font-size:3.5rem; margin-bottom:16px; display:block; }
+.emergency-title { font-family:var(--font-display); font-size:2rem; color:var(--emergency); margin-bottom:14px; font-weight:700; }
+.emergency-msg { font-size:1.05rem; color:var(--text-primary); margin-bottom:6px; font-weight:600; }
+.emergency-sub { font-size:0.88rem; color:var(--text-secondary); margin-bottom:32px; line-height:1.6; }
+.btn-dismiss { background:transparent; border:1.5px solid var(--text-muted); color:var(--text-muted); padding:9px 22px; border-radius:var(--radius-sm); font-family:var(--font-ui); font-size:0.82rem; cursor:pointer; transition:var(--transition); }
+.btn-dismiss:hover { border-color:var(--text-secondary); color:var(--text-secondary); }
+
+/* ============================================
+   DISEASE CARDS
+   ============================================ */
+.disease-cards { display:flex; flex-direction:column; gap:14px; margin-bottom:28px; }
+.disease-card { background:white; border:1.5px solid var(--border); border-radius:var(--radius-md); padding:22px; cursor:pointer; transition:var(--transition); position:relative; opacity:0; transform:translateY(20px); box-shadow:var(--shadow-card); }
+.disease-card.visible { opacity:1; transform:translateY(0); transition:opacity 0.5s ease,transform 0.5s ease,border-color 0.25s ease; }
+.disease-card:hover { border-color:var(--border-accent); box-shadow:var(--shadow-elevated); }
+.disease-card.selected { border-color:var(--accent); background:#F0FDF9; box-shadow:0 0 0 3px var(--accent-light); }
+.disease-header { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:14px; gap:12px; }
+.disease-name { font-family:var(--font-display); font-size:1.15rem; font-weight:600; color:var(--text-primary); }
+.disease-badges { display:flex; gap:7px; flex-wrap:wrap; align-items:center; }
+
+.badge { padding:3px 10px; border-radius:100px; font-size:0.68rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; }
+.badge-high { background:var(--emergency-light); color:var(--emergency); border:1px solid rgba(220,38,38,0.2); }
+.badge-moderate { background:var(--warning-light); color:var(--warning); border:1px solid rgba(217,119,6,0.2); }
+.badge-low { background:var(--success-light); color:var(--success); border:1px solid rgba(5,150,105,0.2); }
+.badge-rare { background:var(--purple-light); color:var(--purple); border:1px solid rgba(124,58,237,0.2); }
+
+.confidence-bar-container { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
+.confidence-bar-track { flex:1; height:6px; background:var(--bg-deep); border-radius:100px; overflow:hidden; }
+.confidence-bar-fill { height:100%; border-radius:100px; background:linear-gradient(90deg,var(--accent),#14b8a6); animation:barFill 1.5s ease-in-out both; }
+.confidence-num { font-size:0.82rem; font-weight:700; color:var(--accent); min-width:36px; text-align:right; }
+.disease-reasoning { font-size:0.8rem; color:var(--text-muted); font-style:italic; line-height:1.5; }
+.disease-radio { position:absolute; top:22px; right:22px; width:18px; height:18px; accent-color:var(--accent); cursor:pointer; }
+
+/* ============================================
+   DRUG CARDS
+   ============================================ */
+.drug-cards { display:flex; flex-direction:column; gap:12px; margin-bottom:22px; }
+.drug-card { background:white; border:1px solid var(--border); border-left:3px solid var(--accent); border-radius:var(--radius-sm); padding:16px 18px; display:flex; align-items:flex-start; gap:14px; transition:var(--transition); box-shadow:var(--shadow-card); }
+.drug-card:hover { background:var(--bg-elevated); }
+.drug-checkbox { margin-top:2px; width:17px; height:17px; accent-color:var(--accent); cursor:pointer; flex-shrink:0; }
+.drug-info { flex:1; }
+.drug-name { font-weight:600; color:var(--text-primary); font-size:0.92rem; margin-bottom:5px; display:flex; align-items:center; gap:7px; flex-wrap:wrap; }
+.badge-orphan { background:rgba(217,119,6,0.1); color:var(--warning); border:1px solid rgba(217,119,6,0.25); }
+.drug-dosage { font-size:0.82rem; color:var(--accent); font-weight:500; margin-bottom:3px; }
+.drug-dosage-edit { background:var(--bg-elevated); border:1px solid var(--border); color:var(--accent); font-size:0.8rem; padding:4px 10px; border-radius:4px; font-family:var(--font-ui); margin-top:4px; width:100%; max-width:280px; }
+.drug-category { font-size:0.75rem; color:var(--text-muted); }
+
+.interaction-banner { background:var(--warning-light); border:1px solid rgba(217,119,6,0.25); border-radius:var(--radius-sm); padding:11px 14px; margin-bottom:14px; font-size:0.82rem; color:var(--warning); display:flex; align-items:flex-start; gap:8px; }
+.allergy-warning { background:var(--emergency-light); border:1px solid rgba(220,38,38,0.2); border-radius:var(--radius-sm); padding:11px 14px; margin-bottom:14px; font-size:0.82rem; color:var(--emergency); display:flex; align-items:flex-start; gap:8px; }
+.clinical-notes-section { margin-top:24px; padding-top:24px; border-top:1px solid var(--border); }
+
+/* ============================================
+   PRESCRIPTION
+   ============================================ */
+.prescription-wrapper { max-width:720px; }
+.rx-card { background:white; color:#1a202c; border-radius:var(--radius-md); padding:36px; margin-bottom:24px; box-shadow:var(--shadow-elevated); border:1px solid var(--border); }
+.rx-header { display:flex; align-items:flex-start; justify-content:space-between; padding-bottom:18px; border-bottom:2px solid var(--accent); margin-bottom:18px; }
+.rx-logo { font-family:var(--font-display); font-size:1.25rem; font-weight:700; color:var(--accent); }
+.rx-meta { font-size:0.78rem; color:var(--text-secondary); text-align:right; }
+.rx-section { margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.rx-section:last-child { border-bottom:none; margin-bottom:0; padding-bottom:0; }
+.rx-label { font-size:0.68rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:7px; }
+.rx-value { font-size:0.92rem; color:var(--text-primary); line-height:1.6; }
+.rx-allergy { color:var(--emergency); font-weight:600; }
+.rx-rare-badge { display:inline-flex; align-items:center; gap:4px; background:var(--purple-light); color:var(--purple); border:1px solid rgba(124,58,237,0.25); padding:2px 10px; border-radius:100px; font-size:0.68rem; font-weight:700; text-transform:uppercase; margin-left:8px; }
+.rx-drug-item { margin-bottom:10px; padding:9px 12px; background:var(--bg-elevated); border-left:3px solid var(--accent); border-radius:4px; }
+.rx-drug-name { font-weight:600; color:var(--text-primary); font-size:0.88rem; }
+.rx-drug-dosage { font-size:0.8rem; color:var(--accent); }
+.rx-drug-cat { font-size:0.73rem; color:var(--text-muted); }
+.rx-orphan { display:inline-block; background:rgba(217,119,6,0.1); color:var(--warning); border:1px solid rgba(217,119,6,0.25); padding:1px 7px; border-radius:100px; font-size:0.63rem; font-weight:700; text-transform:uppercase; margin-left:6px; }
+.rx-signature { margin-top:28px; padding-top:18px; border-top:1px dashed #CBD5E0; }
+.rx-sig-line { border-bottom:1px solid var(--text-primary); width:200px; margin-top:32px; margin-bottom:4px; }
+.rx-sig-label { font-size:0.72rem; color:var(--text-muted); }
+.rx-disclaimer { font-size:0.68rem; color:var(--text-muted); margin-top:14px; font-style:italic; }
+
+.rx-actions { display:flex; gap:12px; flex-wrap:wrap; }
+.btn-print { background:var(--accent); color:white; border:none; padding:12px 26px; border-radius:var(--radius-sm); font-family:var(--font-ui); font-size:0.88rem; font-weight:600; cursor:pointer; transition:var(--transition); display:flex; align-items:center; gap:7px; }
+.btn-print:hover { background:var(--accent-hover); transform:translateY(-1px); }
+.btn-whatsapp { background:#25d366; color:white; border:none; padding:12px 26px; border-radius:var(--radius-sm); font-family:var(--font-ui); font-size:0.88rem; font-weight:600; cursor:pointer; transition:var(--transition); display:flex; align-items:center; gap:7px; }
+.btn-whatsapp:hover { background:#20ba5a; transform:translateY(-1px); }
+.btn-new { background:white; color:var(--text-secondary); border:1.5px solid var(--border); padding:12px 22px; border-radius:var(--radius-sm); font-family:var(--font-ui); font-size:0.88rem; cursor:pointer; transition:var(--transition); display:flex; align-items:center; gap:7px; }
+.btn-new:hover { border-color:var(--accent); color:var(--accent); }
+
+/* ============================================
+   CHAT
+   ============================================ */
+.chat-layout { display:flex; flex-direction:column; height:100vh; background:var(--bg-deep); }
+.chat-topbar { height:64px; background:rgba(255,255,255,0.95); border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; padding:0 28px; flex-shrink:0; box-shadow:0 1px 8px rgba(0,0,0,0.06); }
+.chat-messages { flex:1; overflow-y:auto; padding:28px; display:flex; flex-direction:column; gap:14px; }
+.message { display:flex; gap:10px; max-width:640px; animation:fadeInUp 0.3s ease both; }
+.message.user { align-self:flex-end; flex-direction:row-reverse; }
+.message-avatar { width:34px; height:34px; border-radius:50%; background:var(--bg-elevated); display:flex; align-items:center; justify-content:center; font-size:0.9rem; flex-shrink:0; border:1px solid var(--border); }
+.message.user .message-avatar { background:var(--accent); }
+.message-bubble { background:white; border:1px solid var(--border); border-radius:12px; padding:12px 16px; font-size:0.88rem; line-height:1.6; color:var(--text-primary); box-shadow:var(--shadow-card); }
+.message.user .message-bubble { background:var(--accent); border-color:var(--accent); color:white; border-radius:12px 4px 12px 12px; }
+.message.ai .message-bubble { border-radius:4px 12px 12px 12px; }
+.chat-chips { display:flex; gap:7px; flex-wrap:wrap; padding:14px 28px 0; }
+.chat-chip { background:white; border:1.5px solid var(--border); color:var(--text-secondary); padding:7px 14px; border-radius:100px; font-size:0.78rem; cursor:pointer; transition:var(--transition); font-family:var(--font-ui); box-shadow:var(--shadow-card); }
+.chat-chip:hover { border-color:var(--accent); color:var(--accent); }
+.chat-input-row { padding:18px 28px 24px; display:flex; gap:10px; border-top:1px solid var(--border); background:white; }
+.chat-input { flex:1; background:var(--bg-elevated); border:1.5px solid var(--border); color:var(--text-primary); padding:11px 16px; border-radius:100px; font-family:var(--font-ui); font-size:0.88rem; outline:none; transition:var(--transition); }
+.chat-input:focus { border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-light); }
+.btn-send { background:var(--accent); color:white; border:none; width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:var(--transition); flex-shrink:0; font-size:1rem; }
+.btn-send:hover:not(:disabled) { background:var(--accent-hover); transform:scale(1.05); }
+.btn-send:disabled { opacity:0.4; cursor:not-allowed; }
+
+/* ============================================
+   BANNERS
+   ============================================ */
+.banner-info { background:var(--accent-light); border:1px solid var(--border-accent); color:var(--accent); padding:11px 14px; border-radius:var(--radius-sm); font-size:0.82rem; margin-bottom:14px; display:flex; align-items:center; gap:7px; }
+.banner-fallback { background:var(--warning-light); border:1px solid rgba(217,119,6,0.25); color:var(--warning); padding:11px 14px; border-radius:var(--radius-sm); font-size:0.82rem; margin-bottom:18px; }
+
+/* ============================================
+   PATIENT PORTAL
+   ============================================ */
+.patient-portal { min-height:100vh; background:linear-gradient(135deg, #F0FDF9 0%, #E6F7F5 100%); display:flex; flex-direction:column; }
+.patient-topbar { height:64px; background:rgba(255,255,255,0.95); border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; padding:0 28px; box-shadow:0 1px 8px rgba(0,0,0,0.06); }
+.patient-main { flex:1; max-width:680px; margin:0 auto; padding:40px 24px; width:100%; }
+
+/* ============================================
+   PRINT
+   ============================================ */
+@media print {
+  body { background:white; }
+  .app-sidebar, .app-topbar, .rx-actions, .btn-row, .demo-section, .no-print { display:none !important; }
+  .app-main { margin:0; padding:0; }
+  .rx-card { box-shadow:none; border:1px solid #ddd; }
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+
+/* ============================================
+   RESPONSIVE — TABLET (max 1100px)
+   ============================================ */
+@media (max-width:1100px) {
+  .features-grid { grid-template-columns:repeat(2,1fr); }
+  .video-grid { grid-template-columns:1fr; }
+}
+
+/* ============================================
+   RESPONSIVE — MOBILE (max 768px)
+   ============================================ */
+@media (max-width:768px) {
+
+  /* NAVBAR */
+  .navbar { padding:0 16px; height:60px; }
+  .navbar-links { display:none; }
+  .navbar-logo { font-size:1.1rem; }
+  .navbar-cta { padding:8px 14px; font-size:0.82rem; }
+
+  /* HERO */
+  .hero { padding:80px 20px 40px; min-height:auto; }
+  .hero-title { font-size:2.4rem; }
+  .hero-subtitle { font-size:0.95rem; }
+  .hero-desc { font-size:0.88rem; }
+  .hero-buttons { flex-direction:column; align-items:center; }
+  .hero-buttons .btn-primary,
+  .hero-buttons .btn-outline { width:100%; max-width:280px; justify-content:center; }
+  .btn-primary { padding:13px 24px; }
+  .btn-outline { padding:13px 24px; }
+
+  /* HERO STATS */
+  .hero-content > div:last-child {
+    gap:20px !important;
+    padding-top:20px !important;
+  }
+
+  /* VIDEO SECTION */
+  .video-section { padding:60px 16px; }
+  .video-section .section-header { margin-bottom:32px; }
+  .video-section > div:nth-child(2) {
+    grid-template-columns:1fr !important;
+    gap:16px !important;
+  }
+  .video-card { aspect-ratio:16/9; }
+
+  /* FEATURES */
+  .features-section { padding:60px 16px; }
+  .features-grid { grid-template-columns:1fr 1fr; gap:12px; }
+  .feature-card { padding:20px 16px; }
+
+  /* HOW IT WORKS */
+  .how-section { padding:60px 16px; }
+  .steps-flow { flex-direction:column; align-items:center; gap:20px; }
+  .step-item { width:100%; max-width:280px; flex-direction:row; text-align:left; gap:16px; padding:0; }
+  .step-item::after { display:none; }
+  .step-circle { width:44px; height:44px; font-size:1rem; flex-shrink:0; margin-bottom:0; }
+
+  /* SECTIONS PADDING */
+  .video-section, .features-section, .how-section { padding:60px 16px; }
+  .section-title { font-size:1.5rem; }
+
+  /* APP LAYOUT */
+  .app-sidebar { display:none; }
+  .app-main { margin-left:0 !important; padding:16px !important; margin-top:64px; }
+  .app-topbar { padding:0 14px; height:60px; overflow-x:auto; }
+  .topbar-logo { font-size:1rem; }
+  .topbar-actions { gap:6px !important; }
+  .topbar-btn { padding:5px 10px; font-size:0.75rem; }
+
+  /* STEP CONTAINER */
+  .step-container { max-width:100% !important; }
+  .step-heading { font-size:1.3rem; }
+  .step-subheading { font-size:0.82rem; }
+
+  /* FORMS */
+  .form-row { grid-template-columns:1fr !important; }
+  .form-grid { gap:14px; }
+  input[type="text"],
+  input[type="number"],
+  input[type="tel"],
+  textarea, select { font-size:16px; } /* Prevents zoom on iOS */
+
+  /* RADIO GROUP */
+  .radio-group { flex-wrap:wrap; gap:8px; }
+
+  /* BUTTONS */
+  .btn-row { flex-direction:column; gap:10px; }
+  .btn-next { width:100%; justify-content:center; padding:13px; }
+  .btn-secondary { width:100%; justify-content:center; }
+
+  /* DISEASE CARDS */
+  .disease-card { padding:16px; }
+  .disease-header { flex-direction:column; gap:10px; }
+  .disease-radio { top:14px; right:14px; }
+  .disease-badges { flex-wrap:wrap; }
+
+  /* DRUG CARDS */
+  .drug-card { padding:12px; }
+
+  /* PRESCRIPTION */
+  .prescription-wrapper { max-width:100%; }
+  .rx-card { padding:20px 16px; }
+  .rx-header { flex-direction:column; gap:10px; }
+  .rx-actions { flex-direction:column; gap:10px; }
+  .btn-print, .btn-whatsapp, .btn-new { width:100%; justify-content:center; }
+
+  /* PATIENT PORTAL */
+  .patient-topbar { padding:0 14px; height:60px; }
+  .patient-main { padding:16px 14px; }
+
+  /* CHAT */
+  .chat-layout { height:100vh; }
+  .chat-topbar { padding:0 14px; height:60px; }
+  .chat-messages { padding:16px 14px; }
+  .chat-input-row { padding:12px 14px 16px; }
+  .chat-chips { padding:10px 14px 0; }
+  .chat-chip { font-size:0.72rem; padding:5px 10px; }
+  .message { max-width:90% !important; }
+
+  /* DEMO SECTION */
+  .demo-section { padding:14px; }
+  .demo-buttons { gap:6px; }
+  .demo-btn { font-size:0.72rem; padding:5px 10px; }
+
+  /* LOADING */
+  .loading-overlay { padding:20px; }
+  .loading-text { font-size:0.88rem; text-align:center; }
+
+  /* EMERGENCY */
+  .emergency-box { padding:28px 20px; margin:16px; }
+  .emergency-title { font-size:1.5rem; }
+
+  /* LOGIN PAGE */
+  .login-page { padding:16px; }
+
+  /* TESTIMONIALS */
+  .testimonials-grid,
+  [style*="grid-template-columns: repeat(3"] { grid-template-columns:1fr !important; }
+
+  /* PATIENT FLOW GRID */
+  [style*="grid-template-columns: repeat(3,1fr)"] { grid-template-columns:1fr !important; }
+  [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns:1fr !important; }
+
+  /* DASHBOARD */
+  [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns:1fr !important; }
+
+  /* STAT CARDS */
+  [style*="display: flex; gap: '16px'"] { flex-wrap:wrap; }
+
+  /* FOOTER */
+  .landing-footer { padding:28px 16px; text-align:center; }
+}
+
+/* ============================================
+   RESPONSIVE — SMALL MOBILE (max 480px)
+   ============================================ */
+@media (max-width:480px) {
+  .hero-title { font-size:2rem; }
+  .features-grid { grid-template-columns:1fr; }
+  .navbar-cta { display:none; }
+
+  /* Show only essential topbar items on tiny screens */
+  .app-topbar { gap:6px; }
+
+  /* Full width buttons */
+  .btn-print, .btn-whatsapp, .btn-new,
+  .btn-next, .btn-secondary { font-size:0.85rem; }
+
+  /* Prescription card */
+  .rx-logo { font-size:1rem; }
+  .rx-drug-item { padding:8px; }
+
+  /* Video cards full height */
+  .video-card { aspect-ratio:4/3; }
+
+  /* Step heading */
+  .step-heading { font-size:1.2rem; }
+}
+
+/* ============================================
+   MOBILE INLINE STYLE OVERRIDES
+   ============================================ */
+@media (max-width:768px) {
+  /* Patient flow grid */
+  section[id="patient-flow"] {
+    padding: 48px 16px !important;
+  }
+
+  /* Testimonials grid */
+  .testimonials-section {
+    padding: 60px 16px !important;
+  }
+
+  /* App topbar doctor card — hide on small screens */
+  .topbar-doctor-card {
+    display: none;
+  }
+
+  /* Login page card */
+  .login-card {
+    padding: 20px 16px !important;
+  }
+
+  /* Dashboard tabs scroll */
+  .dashboard-tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 0 16px !important;
+  }
+
+  /* Rx actions mobile */
+  .rx-actions {
+    flex-direction: column !important;
+  }
+
+  /* Video section hint bar */
+  .video-hint-bar {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+}
+
+/* ============================================
+   TOUCH IMPROVEMENTS
+   ============================================ */
+@media (max-width:768px) {
+  /* Larger tap targets */
+  button, .demo-btn, .chat-chip {
+    min-height: 40px;
+  }
+
+  /* Better scroll momentum on iOS */
+  .chat-messages,
+  .app-main,
+  .patient-main {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Prevent text size adjustment on orientation change */
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Fix fixed position elements on iOS */
+  .app-topbar,
+  .patient-topbar,
+  .navbar {
+    position: sticky;
+    top: 0;
+    -webkit-transform: translateZ(0);
+  }
+}

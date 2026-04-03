@@ -1,0 +1,9 @@
+
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://medimentor-backend-2.onrender.com/api/:path*"
+    }
+  ]
+}

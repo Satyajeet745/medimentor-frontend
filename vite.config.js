@@ -7,7 +7,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'https://medimentor-backend-2.onrender.com1',
+        target: 'https://medimentor-backend-2.onrender.com',
         changeOrigin: true
       }
     }
